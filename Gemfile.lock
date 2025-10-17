@@ -8,6 +8,9 @@ GEM
   specs:
     ast (2.4.3)
     date (3.4.1)
+    debug (1.11.0)
+      irb (~> 1.10)
+      reline (>= 0.3.8)
     diff-lcs (1.6.2)
     erb (5.1.1)
     io-console (0.8.1)
@@ -80,6 +83,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  debug (~> 1.11)
   irb
   minihtml!
   rake (~> 13.0)
