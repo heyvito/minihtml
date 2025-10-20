@@ -29,7 +29,7 @@ RSpec.describe "Golden" do
     {
       desc: "Tag with literal attr value",
       input: "<div id=main>",
-      expected_kinds: %i[tag_begin attr_key equal attr_value_literal right_angled],
+      expected_kinds: %i[tag_begin attr_key equal attr_value_unquoted right_angled],
       errors: []
     },
     {
@@ -53,7 +53,7 @@ RSpec.describe "Golden" do
     {
       desc: "Multiple attributes",
       input: "<div a=1 b=\"2\" c={{three}}>",
-      expected_kinds: %i[tag_begin attr_key equal attr_value_literal attr_key equal string attr_key equal executable right_angled],
+      expected_kinds: %i[tag_begin attr_key equal attr_value_unquoted attr_key equal string attr_key equal executable right_angled],
       errors: []
     },
     {
@@ -101,7 +101,7 @@ RSpec.describe "Golden" do
     {
       desc: "Closing tag with attributes (not valid but should tokenize)",
       input: "</div class=bad>",
-      expected_kinds: %i[tag_closing_start attr_key equal attr_value_literal tag_closing_end],
+      expected_kinds: %i[tag_closing_start attr_key equal attr_value_unquoted tag_closing_end],
       errors: []
     },
     {
@@ -143,7 +143,7 @@ RSpec.describe "Golden" do
     {
       desc: "Attr with numeric literal",
       input: "<div count=123>",
-      expected_kinds: %i[tag_begin attr_key equal attr_value_literal right_angled],
+      expected_kinds: %i[tag_begin attr_key equal attr_value_unquoted right_angled],
       errors: []
     },
     {
@@ -167,7 +167,7 @@ RSpec.describe "Golden" do
     {
       desc: "Nested tags with attrs",
       input: "<ul><li id=one>1</li><li id=two>2</li></ul>",
-      expected_kinds: %i[tag_begin right_angled tag_begin attr_key equal attr_value_literal right_angled literal tag_closing_start tag_closing_end tag_begin attr_key equal attr_value_literal right_angled literal tag_closing_start tag_closing_end tag_closing_start tag_closing_end],
+      expected_kinds: %i[tag_begin right_angled tag_begin attr_key equal attr_value_unquoted right_angled literal tag_closing_start tag_closing_end tag_begin attr_key equal attr_value_unquoted right_angled literal tag_closing_start tag_closing_end tag_closing_start tag_closing_end],
       errors: []
     },
     {

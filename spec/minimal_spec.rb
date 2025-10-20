@@ -29,7 +29,7 @@ RSpec.describe "Minimal" do
     {
       desc: "Attribute with literal value",
       input: "<div class=main>",
-      expected_kinds: %i[tag_begin attr_key equal attr_value_literal right_angled],
+      expected_kinds: %i[tag_begin attr_key equal attr_value_unquoted right_angled],
       errors: []
     },
     {

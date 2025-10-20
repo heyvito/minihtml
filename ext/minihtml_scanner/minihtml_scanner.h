@@ -45,7 +45,6 @@ DEFINE_REUSABLE_SYMBOL(tag_closing_start);
 DEFINE_REUSABLE_SYMBOL(tag_closing_end);
 DEFINE_REUSABLE_SYMBOL(right_angled);
 DEFINE_REUSABLE_SYMBOL(attr_key);
-DEFINE_REUSABLE_SYMBOL(attr_value_literal);
 DEFINE_REUSABLE_SYMBOL(kind);
 DEFINE_REUSABLE_SYMBOL(string);
 DEFINE_REUSABLE_SYMBOL(string_interpolation);
@@ -54,6 +53,7 @@ DEFINE_REUSABLE_SYMBOL(executable);
 DEFINE_REUSABLE_SYMBOL(equal);
 DEFINE_REUSABLE_SYMBOL(quote_char);
 DEFINE_REUSABLE_SYMBOL(tag_comment_end);
+DEFINE_REUSABLE_SYMBOL(attr_value_unquoted);
 
 typedef struct {
     VALUE str;

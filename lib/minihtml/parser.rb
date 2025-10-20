@@ -28,7 +28,7 @@ module MiniHTML
         else
           parse_tag
         end
-      when :attr_value_literal
+      when :attr_value_unquoted
         AST::Literal.new(stream.consume)
       when :string
         AST::String.new(stream.consume)

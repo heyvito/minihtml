@@ -294,6 +294,15 @@ static void scanner_consume_attr_name(scanner_t *t) {
     }
 }
 
+static void scanner_consume_unquoted_attr_value(scanner_t *t) {
+  bool consumed = false;
+  while (t->look[0] != EOF && !scanner_is_space(t->look[0]) && t->look[0] != SOLIDUS && t->look[0] != ANGLED_RIGHT) {
+    scanner_consume(t);
+    consumed = true;
+  }
+  if (consumed) scanner_push_token_simple(t, sym_attr_value_unquoted);
+}
+
 static void scanner_consume_attr(scanner_t *t) {
     scanner_start_token(t);
     scanner_consume_attr_name(t);
@@ -316,8 +325,7 @@ static void scanner_consume_attr(scanner_t *t) {
                 }
             default:
                 scanner_start_token(t);
-                scanner_consume_tag_ident(t);
-                scanner_push_token_simple(t, sym_attr_value_literal);
+                scanner_consume_unquoted_attr_value(t);
                 break;
         }
     }
@@ -529,7 +537,6 @@ RUBY_FUNC_EXPORTED void Init_minihtml_scanner(void) {
     INITIALIZE_REUSABLE_SYMBOL(tag_closing_end);
     INITIALIZE_REUSABLE_SYMBOL(right_angled);
     INITIALIZE_REUSABLE_SYMBOL(attr_key);
-    INITIALIZE_REUSABLE_SYMBOL(attr_value_literal);
     INITIALIZE_REUSABLE_SYMBOL(kind);
     INITIALIZE_REUSABLE_SYMBOL(string);
     INITIALIZE_REUSABLE_SYMBOL(string_interpolation);
@@ -538,6 +545,7 @@ RUBY_FUNC_EXPORTED void Init_minihtml_scanner(void) {
     INITIALIZE_REUSABLE_SYMBOL(equal);
     INITIALIZE_REUSABLE_SYMBOL(quote_char);
     INITIALIZE_REUSABLE_SYMBOL(tag_comment_end);
+    INITIALIZE_REUSABLE_SYMBOL(attr_value_unquoted);
 
     rb_define_alloc_func(rb_cScanner, scanner_alloc);
     rb_define_method(rb_cScanner, "initialize", scanner_initialize, 1);
