@@ -60,4 +60,26 @@ RSpec.describe "Parsing" do
     expect(tag.children).to be_empty
     expect(tag).to be_self_closing
   end
+
+  it "parses attrs with colons" do
+    source = <<~HTML
+      <Foo::Bar::Banner cx-on:namespace:eventName="handler" />
+    HTML
+
+    ast = MiniHTML::Parser.new(source.strip).parse
+    expect(ast.length).to eq 1
+
+    tag = ast.first
+
+    expect(tag.name).to eq "Foo::Bar::Banner"
+    expect(tag.attributes.length).to eq 1
+
+    at = tag.attributes.first
+    expect(at.name).to eq "cx-on:namespace:eventName"
+    expect(at.value).to be_a MiniHTML::AST::String
+    expect(at.value.literal).to eq "handler"
+
+    expect(tag.children).to be_empty
+    expect(tag).to be_self_closing
+  end
 end

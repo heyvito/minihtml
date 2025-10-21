@@ -285,7 +285,7 @@ static inline bool scanner_is_attr_ident(const int p) {
     return (p >= 'A' && p <= 'Z')
         || (p >= 'a' && p <= 'z')
         || (p >= '0' && p <= '9')
-        || p == '-' || p == '_' || p == '.';
+        || p == '-' || p == '_' || p == '.' || p == ':';
 }
 
 static void scanner_consume_attr_name(scanner_t *t) {
